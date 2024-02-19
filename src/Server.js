@@ -1,10 +1,15 @@
 import express from "express"
 import configViewEndine from "./config/viewEnigne"
 import initWebRouter from "./router/web"
+
 require('dotenv').config();
 
 import bodyParser from 'body-parser';
 const app = express();
+import bcrypt from 'bcryptjs'
+const salt = bcrypt.genSaltSync(10);
+const hash = bcrypt.hashSync("B4c0/\/", salt);
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
