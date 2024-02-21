@@ -8,3 +8,6 @@ npm install --save-exact @babel/core@7.15.4 @babel/node@7.15.4 @babel/preset-env
 npm install --save-exact mysql2@2.3.3
 
 npm install --save-exact bcryptjs@2.4.3 ( mã hóa dữ liệu)
+
+npm install --save-exact sequelize@6.13.0
+npm install --save-exact sequelize-cli@6.3.0
