@@ -29,6 +29,7 @@ const handleUserPage = async (req, res) => {
     let userList = await userService.getUserList()
     return res.render('users.ejs', { userList })
 }
+
 const handleCreateNewUser = (req, res) => {
     const username = req.body.username
     const password = req.body.password
@@ -38,6 +39,37 @@ const handleCreateNewUser = (req, res) => {
     return res.redirect('/user')
 
 }
+const handleUpdateUser = async (req, res) => {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'jwt',
+        Promise: bluebird,
+    });
+    const id = req.params.id
+    console.log('check id update ', id)
+    const [user, fields] = await connection.execute(`Select * from users where id = ?`, [id]);
+    console.log('check row', user)
+    return res.render('users-update.ejs', { user })
+}
+const UpdateUser = async (req, res) => {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'jwt',
+        Promise: bluebird,
+    });
+    const id = req.params.id
+    const username = req.body.username
+    const email = req.body.email
+    console.log(req.params.id)
+    await connection.execute(`
+    UPDATE users SET username = ?, email = ? WHERE id = ?
+    `, [email, username, id]
+    )
+    let userList = await userService.getUserList()
+    return res.render('users.ejs', { userList })
+}
 module.exports = {
-    handleHellwork, handleUserPage, handleCreateNewUser, handleDeleteUser,
+    handleHellwork, handleUserPage, handleCreateNewUser, handleDeleteUser, handleUpdateUser, UpdateUser
 }

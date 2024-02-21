@@ -66,9 +66,12 @@
                                 <%= item.username %>
                             </td>
 
-                            <td> <button class="btn btn-warning">Edit</button>
-                                <form style="display: inline;" action="/user/<%= item.id %>" method="post"> <button
-                                        class="btn btn-danger">Delete</button>
+                            <td>
+                                <form style="display: inline;" action="/update-user/<%= item.id %>" method=" post">
+                                    <button class="btn btn-warning">Edit</button>
+                                </form>
+                                <form style="display: inline;" action="/delete-user/<%= item.id %>" method="post">
+                                    <button class="btn btn-danger">Delete</button>
                                 </form>
 
                             </td>
