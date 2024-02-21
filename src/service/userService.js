@@ -11,13 +11,21 @@ const HashPassword = (password) => {
     console.log("check pass", checkPass)
     return HashPassword;
 }
-const createNewUser = (email, password, username) => {
-    let HashPasswordd = HashPassword(password)
+const createNewUser = async (email, password, username) => {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'jwt',
+        Promise: bluebird,
+    });
 
-    connection.query(`INSERT INTO users (email,password,username) VALUES (?,?,?)`, [email, HashPasswordd, username],
-        function (err, results, fields) {
-            console.log(results)
-        })
+    let HashPasswordd = HashPassword(password)
+    try {
+        await connection.execute(`INSERT INTO users (email,password,username) VALUES (?,?,?)`, [email, HashPasswordd, username]);
+        console.log('Thêm dữ liệu thành công')
+    } catch (error) {
+        console.log(error)
+    }
 
 }
 const getUserList = async () => {
@@ -29,8 +37,8 @@ const getUserList = async () => {
     });
 
     try {
-        const [rows, fields] = await connection.execute(`Select * from users`);
-        console.log(rows)
+        const [rows, fields] = await connection.execute(`Select * from users order by id DESC`);
+        // console.log(rows)
         return rows
     } catch (error) {
         console.log(error)
