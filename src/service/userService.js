@@ -38,7 +38,8 @@ const getUserList = async () => {
 
     try {
         const [rows, fields] = await connection.execute(`Select * from users order by id DESC`);
-        // console.log(rows)
+        console.log('cay the nhờ')
+
         return rows
     } catch (error) {
         console.log(error)
