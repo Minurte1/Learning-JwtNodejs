@@ -16,32 +16,31 @@
     <div class="container">
         <div class="row">
             <div class="edit-user-form-user ">
-                <% user.forEach(function(item,index) { %>
-                    <form action="/user/update-user/accept/<%= item.id %>" method="post">
+                <form action="/user/update-user/accept/<%= UserOne.id %>" method="post">
 
-                        <div class=" mt-3">
-                            <h3>Create User</h3>
-                        </div>
+                    <div class=" mt-3">
+                        <h3>Create User</h3>
+                    </div>
 
-                        <div class="mb-3 mt-3 col-6">
-                            <label for="email" class="form-label">Email address</label>
-                            <input name="email" value="    <%= item.email %>" type="email" class="form-control"
-                                id="email" required>
+                    <div class="mb-3 mt-3 col-6">
+                        <label for="email" class="form-label">Email address</label>
+                        <input name="email" value="<%= UserOne.email %>" type="email" class="form-control" id="email"
+                            required>
 
-                        </div>
-                        <div class="col-6"></div>
+                    </div>
+                    <div class="col-6"></div>
 
-                        <div class="col-6"></div>
-                        <div class="mb-3 col-6">
-                            <label for="username" class="form-label">User Name</label>
-                            <input name="username" value="  <%= item.username %>" type="text" class="form-control"
-                                id="username" required>
-                        </div>
+                    <div class="col-6"></div>
+                    <div class="mb-3 col-6">
+                        <label for="username" class="form-label">User Name</label>
+                        <input name="username" value="  <%= UserOne.username %>" type="text" class="form-control"
+                            id="username" required>
+                    </div>
 
-                        <div class="col-12"> <button type="submit" class="btn btn-primary">Submit</button></div>
-                        <% }); %>
+                    <div class="col-12"> <button type="submit" class="btn btn-primary">Submit</button></div>
 
-                    </form>
+
+                </form>
 
 
             </div>

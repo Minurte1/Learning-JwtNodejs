@@ -1,28 +1,41 @@
 import userService from '../service/userService'
 import mysql from 'mysql2/promise';
 import bluebird from 'bluebird';
+import user from '../models/models/user';
+import db from '../models/models';
+
 const handleHellwork = (req, res) => {
 
     return res.render('home.ejs')
 }
 const handleDeleteUser = async (req, res) => {
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'jwt',
-        Promise: bluebird,
-    });
-    const id = req.params.id
-    console.log('check id', id)
-    // let userList = await userService.getUserList()
+    const UserID = req.params.id
     try {
-        await connection.execute(`delete From user Where id = ?`, [id]);
+        await userService.getDeleteUser(UserID)
         console.log('thanh cong')
         return res.redirect('/user')
     } catch (error) {
         console.log(error)
         return res.redirect('/user')
     }
+
+    // const connection = await mysql.createConnection({
+    //     host: 'localhost',
+    //     user: 'root',
+    //     database: 'jwt',
+    //     Promise: bluebird,
+    // });
+    // const id = req.params.id
+    // console.log('check id', id)
+    // // let userList = await userService.getUserList()
+    // try {
+    //     await connection.execute(`delete From user Where id = ?`, [id]);
+    //     console.log('thanh cong')
+    //     return res.redirect('/user')
+    // } catch (error) {
+    //     console.log(error)
+    //     return res.redirect('/user')
+    // }
 
 }
 const handleUserPage = async (req, res) => {
@@ -40,33 +53,37 @@ const handleCreateNewUser = async (req, res) => {
 
 }
 const handleUpdateUser = async (req, res) => {
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'jwt',
-        Promise: bluebird,
-    });
+
     const id = req.params.id
-    console.log('check id update ', id)
-    const [user, fields] = await connection.execute(`Select * from user where id = ?`, [id]);
-    console.log('check row', user)
-    return res.render('users-update.ejs', { user })
+
+    let UserOne = [];
+    UserOne = await userService.getUserById(id)
+
+    return res.render('users-update.ejs', { UserOne })
+    // const connection = await mysql.createConnection({
+    //     host: 'localhost',
+    //     user: 'root',
+    //     database: 'jwt',
+    //     Promise: bluebird,
+    // });
+    // const [user, fields] = await connection.execute(`Select * from user where id = ?`, [id]);
+    // console.log('check row', user)
+
 }
 const UpdateUser = async (req, res) => {
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'jwt',
-        Promise: bluebird,
-    });
+
     const id = req.params.id
     const username = req.body.username
     const email = req.body.email
     console.log(req.params.id)
-    await connection.execute(`
-    UPDATE users SET username = ?, email = ? WHERE id = ?
-    `, [email, username, id]
-    )
+    await db.User.update({
+        email: email,
+        username: username,
+    },
+        {
+            where: { id: id }
+        }
+    );
     let userList = await userService.getUserList()
     return res.render('users.ejs', { userList })
 }

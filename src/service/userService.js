@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import mysql from 'mysql2/promise';
 import bluebird from 'bluebird';
 import db from '../models/models';
+import user from '../models/models/user';
 // create the connection, specify bluebird as Promise
 
 const salt = bcrypt.genSaltSync(10);
@@ -28,27 +29,52 @@ const createNewUser = async (email, password, username) => {
     }
 
 }
+const getUserById = async (id) => {
+    let user = [];
+    user = await db.User.findOne({
+        where: { id: id }
+
+    })
+    console.log('check user ', user.get({ plain: true }))
+    return user.get({ plain: true })
+
+}
+const getDeleteUser = async (userID) => {
+    await db.User.destroy({
+        where: {
+            id: userID
+        }
+    })
+}
 const getUserList = async () => {
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'jwt',
-        Promise: bluebird,
-    });
-
-    try {
-        const [rows, fields] = await connection.execute(`Select * from user order by id DESC`);
+    let users = []
+    users = await db.User.findAll();
 
 
-        return rows
-    } catch (error) {
-        console.log(error)
-    }
+
+
+    return users;
+
+
+    // const connection = await mysql.createConnection({
+    //     host: 'localhost',
+    //     user: 'root',
+    //     database: 'jwt',
+    //     Promise: bluebird,
+    // });
+    // try {
+    //     const [rows, fields] = await connection.execute(`Select * from user order by id DESC`);
+    //     return rows
+    // } catch (error) {
+    //     console.log(error)
+    // }
 
 
 
 }
 module.exports = {
     createNewUser,
-    getUserList
+    getUserList,
+    getDeleteUser,
+    getUserById
 }
