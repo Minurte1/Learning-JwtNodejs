@@ -30,12 +30,12 @@ const handleUserPage = async (req, res) => {
     return res.render('users.ejs', { userList })
 }
 
-const handleCreateNewUser = (req, res) => {
+const handleCreateNewUser = async (req, res) => {
     const username = req.body.username
     const password = req.body.password
     const email = req.body.email
 
-    userService.createNewUser(email, password, username)
+    await userService.createNewUser(email, password, username)
     return res.redirect('/user')
 
 }
