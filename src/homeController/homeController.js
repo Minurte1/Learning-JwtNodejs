@@ -16,7 +16,7 @@ const handleDeleteUser = async (req, res) => {
     console.log('check id', id)
     // let userList = await userService.getUserList()
     try {
-        await connection.execute(`delete From usErs Where id = ?`, [id]);
+        await connection.execute(`delete From user Where id = ?`, [id]);
         console.log('thanh cong')
         return res.redirect('/user')
     } catch (error) {
@@ -48,7 +48,7 @@ const handleUpdateUser = async (req, res) => {
     });
     const id = req.params.id
     console.log('check id update ', id)
-    const [user, fields] = await connection.execute(`Select * from users where id = ?`, [id]);
+    const [user, fields] = await connection.execute(`Select * from user where id = ?`, [id]);
     console.log('check row', user)
     return res.render('users-update.ejs', { user })
 }

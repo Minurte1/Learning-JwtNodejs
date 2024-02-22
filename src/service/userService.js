@@ -21,7 +21,7 @@ const createNewUser = async (email, password, username) => {
 
     let HashPasswordd = HashPassword(password)
     try {
-        await connection.execute(`INSERT INTO users (email,password,username) VALUES (?,?,?)`, [email, HashPasswordd, username]);
+        await connection.execute(`INSERT INTO user (email,password,username) VALUES (?,?,?)`, [email, HashPasswordd, username]);
         console.log('Thêm dữ liệu thành công')
     } catch (error) {
         console.log(error)
@@ -37,7 +37,7 @@ const getUserList = async () => {
     });
 
     try {
-        const [rows, fields] = await connection.execute(`Select * from users order by id DESC`);
+        const [rows, fields] = await connection.execute(`Select * from user order by id DESC`);
 
 
         return rows
