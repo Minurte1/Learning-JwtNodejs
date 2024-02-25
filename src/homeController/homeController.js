@@ -55,7 +55,6 @@ const handleCreateNewUser = async (req, res) => {
 const handleUpdateUser = async (req, res) => {
 
     const id = req.params.id
-
     let UserOne = [];
     UserOne = await userService.getUserById(id)
 
@@ -69,6 +68,13 @@ const handleUpdateUser = async (req, res) => {
     // const [user, fields] = await connection.execute(`Select * from user where id = ?`, [id]);
     // console.log('check row', user)
 
+}
+const CanDeleteIt = () => {
+    var a = 5;
+    var b = 8;
+    var c = 9;
+    c = b - 2;
+    console.log(c)
 }
 const UpdateUser = async (req, res) => {
 
