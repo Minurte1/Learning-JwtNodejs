@@ -46,7 +46,24 @@ const getDeleteUser = async (userID) => {
         }
     })
 }
+
 const getUserList = async () => {
+
+    let newUser = await db.User.findOne({
+        where: { id: 1 },
+        attributes: ["id", "username", "email"],
+        include: { model: db.Group, attributes: ["name", "description"], },
+        raw: true,
+        nest: true,
+    })
+    let roles = await db.Group.findAll({
+
+        include: { model: db.Role, where: { id: 1 }, },
+        raw: true,
+        nest: true,
+    })
+    console.log("check new user ", newUser);
+    console.log("check new roles ", roles);
     let users = []
     users = await db.User.findAll();
 

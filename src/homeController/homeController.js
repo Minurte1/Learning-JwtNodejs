@@ -4,8 +4,8 @@ import bluebird from 'bluebird';
 import user from '../models/models/user';
 import db from '../models/models';
 
-const handleHellwork = (req, res) => {
-
+const handleHellwork = async (req, res) => {
+    await userService.getUserList()
     return res.render('home.ejs')
 }
 const handleDeleteUser = async (req, res) => {
@@ -39,6 +39,7 @@ const handleDeleteUser = async (req, res) => {
 
 }
 const handleUserPage = async (req, res) => {
+
     let userList = await userService.getUserList()
     return res.render('users.ejs', { userList })
 }
@@ -69,13 +70,7 @@ const handleUpdateUser = async (req, res) => {
     // console.log('check row', user)
 
 }
-const CanDeleteIt = () => {
-    var a = 5;
-    var b = 8;
-    var c = 9;
-    c = b - 2;
-    console.log(c)
-}
+
 const UpdateUser = async (req, res) => {
 
     const id = req.params.id
