@@ -1,0 +1,38 @@
+.primary-nav {
+    display: flex;
+    /* Arrange links horizontally */
+    list-style: none;
+    /* Remove default list styling */
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+    background-color: #f0f0f0;
+    /* Example background color */
+    /* Customize as needed */
+}
+
+.nav-link {
+
+    padding: 10px 20px;
+    /* Example padding */
+    /* Customize as needed */
+    text-decoration: none;
+    /* Remove underline */
+    color: #333;
+    /* Example text color */
+    /* Customize as needed */
+    transition: color 0.3s ease;
+    /* Smooth hover effect (optional) */
+}
+
+.nav-link:hover {
+    color: #007bff;
+    /* Example hover color */
+    /* Customize as needed */
+}
+
+.nav-link.active {
+    font-weight: bold;
+    /* Highlight the active link */
+}
