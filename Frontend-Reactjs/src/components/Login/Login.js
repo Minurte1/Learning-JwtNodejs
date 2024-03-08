@@ -1,6 +1,9 @@
 import React from 'react';
 import '../Login/Login.scss'; // Import CSS file
+// import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LogoFb from './image/logo.svg'
+import { Link } from 'react-router-dom';
+
 const LoginForm = () => {
     return (
         <div className="wrap">
@@ -20,7 +23,8 @@ const LoginForm = () => {
                             <button type="submit" className="button1">Create new account</button>
                         </form>
                     </div>
-                    <a href="/" className="create"> Create a Page</a> <span>for a celebrity, brand or business.</span>
+
+                    <Link to="/register" className="create"> Create a Page</Link> <span>for a celebrity, brand or business.</span>
                 </div>
             </div>
         </div>
