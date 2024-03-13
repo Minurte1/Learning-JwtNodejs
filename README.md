@@ -1,6 +1,6 @@
-#Learning JWT Node.js Backend
+Learning JWT Node.js Backend
 
-##Giới thiệu
+Giới thiệu
 
 Đây là một dự án nhỏ để học về cách sử dụng JSON Web Tokens (JWT) trong phát triển ứng dụng backend sử dụng Node.js.
 JWT là một phương pháp phổ biến để xác thực và ủy quyền người dùng trong các ứng dụng web và di động.
