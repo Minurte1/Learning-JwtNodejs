@@ -2,9 +2,14 @@ import React from 'react';
 import '../Login/Login.scss'; // Import CSS file
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LogoFb from './image/logo.svg'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 
 const LoginForm = () => {
+    const history = useHistory();
+    const handleCreateUser = () =>{
+        history.push('/register');
+    }
     return (
         <div className="wrap">
             <div className="container-fb">
@@ -20,11 +25,11 @@ const LoginForm = () => {
                             <button type="submit" className="button">Log in</button>
                             <a href="">Forgotten password?</a>
                             <div className="thanhnang"></div>
-                            <button type="submit" className="button1">Create new account</button>
+                            <button type="submit"  onClick={handleCreateUser} className="button1">Create new account</button>
                         </form>
                     </div>
 
-                    <Link to="/register" className="create"> Create a Page</Link> <span>for a celebrity, brand or business.</span>
+                    <a  className="create"> Create a Page</a> <span>for a celebrity, brand or business.</span>
                 </div>
             </div>
         </div>
@@ -61,6 +66,7 @@ const Footer = () => {
 }
 
 function Login() {
+  
     return (
         <>
             <LoginForm />

@@ -35,24 +35,23 @@
 }
 
 .form {
-
     width: 38%;
-    height: 550px;
-}
+    height: 350px;
 
-.form-login {
+}
+.form-register{
     margin-bottom: 5%;
     margin-top: -3%;
     border-radius: 8px;
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: center;
     width: 100%;
-    height: 400px;
+    height: 530px;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
 }
+
 
 .thanhnang {
     background-color: black;
@@ -148,11 +147,11 @@ p {
 }
 
 form {
-
+margin-top: 5%;
     text-align: center;
     width: 100%;
     height: 300px;
-    border-radius: 15px;
+    // border-radius: 15px;
 
 }
 
