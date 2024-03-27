@@ -88,6 +88,13 @@ const UpdateUser = async (req, res) => {
     let userList = await userService.getUserList()
     return res.render('users.ejs', { userList })
 }
+const testApi = (req,res)=>{
+    return res.status(200).json({
+        message:"oke",
+        data:"test api"
+        })
+    }
 module.exports = {
+    testApi,
     handleHellwork, handleUserPage, handleCreateNewUser, handleDeleteUser, handleUpdateUser, UpdateUser
 }
