@@ -12,7 +12,7 @@ const RegisterForm = () => {
         history.push('/login');
     }
     useEffect(()=>{
-        axios.get("https://reqres.in/api/users?page=2").then(data =>{
+        axios.get("http://localhost:3003/api/test-api").then(data =>{
             console.log("Check data =>",data)
         })
     })
