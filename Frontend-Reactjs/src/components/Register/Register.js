@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../Register/register.scss' // Import CSS file
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LogoFb from '../Login/image/logo.svg'
 import { Link, useHistory } from 'react-router-dom';
-
+import axios from 'axios';
 
 const RegisterForm = () => {
     const history = useHistory();
@@ -11,6 +11,11 @@ const RegisterForm = () => {
     const LoginUser = () => {
         history.push('/login');
     }
+    useEffect(()=>{
+        axios.get("https://reqres.in/api/users?page=2").then(data =>{
+            console.log("Check data =>",data)
+        })
+    })
     return (
         <div className="wrap">
             <div className="container-fb">
