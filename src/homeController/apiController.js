@@ -4,5 +4,9 @@ const testApi = (req, res) => {
         data: "test api"
     });
 }
+const handleRegister = (req,res) =>{
+console.log('helloworkd =>>',req.body)
 
-export { testApi };
+    return
+}
+export { testApi ,handleRegister};

@@ -14,13 +14,16 @@ const [email,setEmail] = useState("");
 const [phone,setPhone] = useState("");
 const [username,setUsername] = useState("");
 const [password,setPassword] = useState("");
-const [confirmPassword,setconfirmPassword] = useState("");
-const [objectCheckInput, setObjectCheckInput] = useState({
+const defaultValidInput = {
     isValidEmail:true,
     isValidPhone:true,
     isValidPassword:true,
-    isValidConfirmPassword:true
-});
+    isValidConfirmPassword:true,
+    isValidUsername:true,
+}
+const [confirmPassword,setconfirmPassword] = useState("");
+const [objectCheckInput, setObjectCheckInput] = useState(defaultValidInput);
+
     const LoginUser = () => {
         history.push('/login');
     }
@@ -36,34 +39,42 @@ const [objectCheckInput, setObjectCheckInput] = useState({
         return vietnamesePhoneNumberRegex.test(phone);
     }
     const isValiInput =() =>{
+        setObjectCheckInput(defaultValidInput)
         if(!email){
             toast.error("Địa chỉ Email của bạn bị rỗng !")
+            setObjectCheckInput({...defaultValidInput, isValidEmail:false})
             return false;
         }
       
         if (!isValidEmail(email)) { 
             toast.error("Email không hợp lệ");
+            setObjectCheckInput({...defaultValidInput, isValidEmail:false})
            return false;
         }
         if (!isValidPhone(phone)) {  
             toast.error("Số điện thoại này không phải số điện thoại Việt Nam !!");
+            setObjectCheckInput({...defaultValidInput, isValidPhone:false})
             return false;
         }
          
         if(!phone){
             toast.error("Số điện thoại của bạn bị rỗng !")
+            setObjectCheckInput({...defaultValidInput, isValidPhone:false})
             return false;
         }
         if(!username){
             toast.error("Tên người dùng của bạn bị rỗng !")
+            setObjectCheckInput({...defaultValidInput, isValidUsername:false})
             return false;
         }
         if(!password){
             toast.error("Password của bạn bị rỗng !")
+            setObjectCheckInput({...defaultValidInput, isValidPassword:false})
             return false;
         }
         if(!confirmPassword){
             toast.error("Re-Password của bạn bị rỗng !")
+            setObjectCheckInput({...defaultValidInput, isValidConfirmPassword:false})
             return false;
         }
     }
@@ -79,11 +90,15 @@ const [objectCheckInput, setObjectCheckInput] = useState({
       
     }
     useEffect(()=>{
-        // axios.get("http://localhost:3003/api/test-api").then(data =>{
+        // axios.post("http://localhost:3003/api/v1/register").then(data =>{
         //     console.log("Check data =>",data)
         // })
+        axios.post('http://localhost:3003/api/v1/register', {
+            email,phone,username,password,confirmPassword
+            
+          })
     })
-    
+    // input1 form-control is-valid is-valid
     return (
         <div className="wrap">
             <div className="container-fb">
@@ -93,16 +108,16 @@ const [objectCheckInput, setObjectCheckInput] = useState({
                 </div>
                 <div className="form">
                     <div className=" form-register">
-                        <form>
-                            <input type="text" name='email' value={email} onChange={(event) =>setEmail(event.target.value)} placeholder="Email address " className="input1 is-invalid" />
-                            <input type="text" value={phone} onChange={(event) =>setPhone(event.target.value)} placeholder="Phone number" className="input1" />
-                            <input type="text" value={username}onChange={(event) =>setUsername(event.target.value)} placeholder="Username " className="input1" />
-                            <input type="password" value={password} onChange={(event) =>setPassword(event.target.value)} placeholder="Password" className="input2" />
-                            <input type="password" value={confirmPassword} onChange={(event) =>setconfirmPassword(event.target.value)} placeholder="Re-Password" className="input2" />
+                        <form> 
+                            <input type="text" name='email' value={email} onChange={(event) =>setEmail(event.target.value)} placeholder="Email address " className={objectCheckInput.isValidEmail ? 'input1 form-control' :'input1 form-control is-invalid'} />
+                            <input type="text" value={phone} onChange={(event) =>setPhone(event.target.value)} placeholder="Phone number" className={objectCheckInput.isValidPhone ? 'input1 form-control' :'input1 form-control is-invalid'} />
+                            <input type="text" value={username}onChange={(event) =>setUsername(event.target.value)} placeholder="Username " className={objectCheckInput.isValidUsername ? 'input1 form-control' :'input1 form-control is-invalid'} />
+                            <input type="password" value={password} onChange={(event) =>setPassword(event.target.value)} placeholder="Password" className={objectCheckInput.isValidPassword ? 'input2 form-control' :'input2 form-control is-invalid'}/>
+                            <input type="password" value={confirmPassword} onChange={(event) =>setconfirmPassword(event.target.value)} placeholder="Re- Password" className={objectCheckInput.isValidConfirmPassword ? 'input2 form-control' :'input2 form-control is-invalid'} />
                             <button  onClick={handleRegister} className="button">Đăng ký thành công</button>
                             <a href="">Forgotten password?</a>
                             <div className="thanhnang"></div>
-
+                        <button className='btn btn-success'>he</button>
                             <button type="submit" onClick={LoginUser} className="button1">Chuyển Sang Login</button>
                         </form>
                     </div>
