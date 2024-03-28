@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Register/register.scss' // Import CSS file
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LogoFb from '../Login/image/logo.svg'
@@ -7,15 +7,25 @@ import axios from 'axios';
 
 const RegisterForm = () => {
     const history = useHistory();
-
+const [email,setEmail] = useState("");
+const [phone,setPhone] = useState("");
+const [username,setUsername] = useState("");
+const [password,setPassword] = useState("");
+const [confirmPassword,setconfirmPassword] = useState("");
     const LoginUser = () => {
         history.push('/login');
     }
+    const handleRegister=(event)=>{
+        event.preventDefault();
+      const userData = {email,phone,username,password,confirmPassword};
+      console.log("checkdataform =>",userData)
+    }
     useEffect(()=>{
-        axios.get("http://localhost:3003/api/test-api").then(data =>{
-            console.log("Check data =>",data)
-        })
+        // axios.get("http://localhost:3003/api/test-api").then(data =>{
+        //     console.log("Check data =>",data)
+        // })
     })
+    
     return (
         <div className="wrap">
             <div className="container-fb">
@@ -26,12 +36,12 @@ const RegisterForm = () => {
                 <div className="form">
                     <div className=" form-register">
                         <form>
-                            <input type="text" placeholder="Email address " className="input1" />
-                            <input type="text" placeholder="Phone number" className="input1" />
-                            <input type="text" placeholder="Username " className="input1" />
-                            <input type="password" placeholder="Password" className="input2" />
-                            <input type="password" placeholder="Re-Password" className="input2" />
-                            <button type="submit" className="button">Đăng ký thành công</button>
+                            <input type="text" name='email' value={email} onChange={(event) =>setEmail(event.target.value)} placeholder="Email address " className="input1" />
+                            <input type="text" value={phone} onChange={(event) =>setPhone(event.target.value)} placeholder="Phone number" className="input1" />
+                            <input type="text" value={username}onChange={(event) =>setUsername(event.target.value)} placeholder="Username " className="input1" />
+                            <input type="password" value={password} onChange={(event) =>setPassword(event.target.value)} placeholder="Password" className="input2" />
+                            <input type="password" value={confirmPassword} onChange={(event) =>setconfirmPassword(event.target.value)} placeholder="Re-Password" className="input2" />
+                            <button  onClick={handleRegister} className="button">Đăng ký thành công</button>
                             <a href="">Forgotten password?</a>
                             <div className="thanhnang"></div>
 
