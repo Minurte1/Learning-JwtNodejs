@@ -4,6 +4,8 @@ import '../Register/register.scss' // Import CSS file
 import LogoFb from '../Login/image/logo.svg'
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterForm = () => {
     const history = useHistory();
@@ -15,10 +17,59 @@ const [confirmPassword,setconfirmPassword] = useState("");
     const LoginUser = () => {
         history.push('/login');
     }
+
+    const  isValidEmail=(email)=> {
+        // Sử dụng regular expression để kiểm tra định dạng email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    const  isValidPhone=(phone)=> {
+        // Sử dụng regular expression để kiểm tra định dạng email
+        const vietnamesePhoneNumberRegex = /^(0[1-9])+([0-9]{8,9})\b/;
+        return vietnamesePhoneNumberRegex.test(phone);
+    }
+    const isValiInput =() =>{
+        if(!email){
+            toast.error("Địa chỉ Email của bạn bị rỗng !")
+            return false;
+        }
+      
+        if (!isValidEmail(email)) { 
+            toast.error("Email không hợp lệ");
+           return false;
+        }
+        if (!isValidPhone(phone)) {  
+            toast.error("Số điện thoại này không phải số điện thoại Việt Nam !!");
+            return false;
+        }
+         
+        if(!phone){
+            toast.error("Số điện thoại của bạn bị rỗng !")
+            return false;
+        }
+        if(!username){
+            toast.error("Tên người dùng của bạn bị rỗng !")
+            return false;
+        }
+        if(!password){
+            toast.error("Password của bạn bị rỗng !")
+            return false;
+        }
+        if(!confirmPassword){
+            toast.error("Re-Password của bạn bị rỗng !")
+            return false;
+        }
+    }
     const handleRegister=(event)=>{
         event.preventDefault();
       const userData = {email,phone,username,password,confirmPassword};
       console.log("checkdataform =>",userData)
+      if(isValiInput()==false){
+        return;
+      }else{
+        toast.success("Bạn đã đăng ký thành công")
+      }
+      
     }
     useEffect(()=>{
         // axios.get("http://localhost:3003/api/test-api").then(data =>{
