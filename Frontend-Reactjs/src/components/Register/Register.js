@@ -6,7 +6,8 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const RegisterForm = () => {
     const history = useHistory();
 const [email,setEmail] = useState("");
@@ -14,6 +15,12 @@ const [phone,setPhone] = useState("");
 const [username,setUsername] = useState("");
 const [password,setPassword] = useState("");
 const [confirmPassword,setconfirmPassword] = useState("");
+const [objectCheckInput, setObjectCheckInput] = useState({
+    isValidEmail:true,
+    isValidPhone:true,
+    isValidPassword:true,
+    isValidConfirmPassword:true
+});
     const LoginUser = () => {
         history.push('/login');
     }
@@ -87,7 +94,7 @@ const [confirmPassword,setconfirmPassword] = useState("");
                 <div className="form">
                     <div className=" form-register">
                         <form>
-                            <input type="text" name='email' value={email} onChange={(event) =>setEmail(event.target.value)} placeholder="Email address " className="input1" />
+                            <input type="text" name='email' value={email} onChange={(event) =>setEmail(event.target.value)} placeholder="Email address " className="input1 is-invalid" />
                             <input type="text" value={phone} onChange={(event) =>setPhone(event.target.value)} placeholder="Phone number" className="input1" />
                             <input type="text" value={username}onChange={(event) =>setUsername(event.target.value)} placeholder="Username " className="input1" />
                             <input type="password" value={password} onChange={(event) =>setPassword(event.target.value)} placeholder="Password" className="input2" />
