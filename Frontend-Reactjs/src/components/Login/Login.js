@@ -2,13 +2,14 @@ import React from 'react';
 import '../Login/Login.scss'; // Import CSS file
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LogoFb from './image/logo.svg'
-import { Link, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginForm = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
+
     const handleCreateUser = () =>{
-        history.push('/register');
+        navigate('/register');
     }
     return (
         <div className="wrap">

@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import '../Register/register.scss' // Import CSS file
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import LogoFb from '../Login/image/logo.svg'
-import { Link, useHistory } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { registerNewUser } from '../../service/UserService';
 const RegisterForm = () => {
-    const history = useHistory();
+    const navigate  = useNavigate();
+
 const [email,setEmail] = useState("");
 const [phone,setPhone] = useState("");
 const [username,setUsername] = useState("");
@@ -25,7 +28,7 @@ const [confirmPassword,setconfirmPassword] = useState("");
 const [objectCheckInput, setObjectCheckInput] = useState(defaultValidInput);
 
     const LoginUser = () => {
-        history.push('/login');
+        navigate('/login');
     }
 
     const  isValidEmail=(email)=> {
@@ -78,7 +81,7 @@ const [objectCheckInput, setObjectCheckInput] = useState(defaultValidInput);
             return false;
         }
     }
-    const handleRegister=(event)=>{
+    const handleRegister=async(event)=>{
         event.preventDefault();
       const userData = {email,phone,username,password,confirmPassword};
       console.log("checkdataform =>",userData)
@@ -86,14 +89,20 @@ const [objectCheckInput, setObjectCheckInput] = useState(defaultValidInput);
         return;
       }else{
         try {
-            axios.post('http://localhost:3003/api/v1/register', {
-                email,phone,username,password,confirmPassword
-                
-              })
+        let serverData =await registerNewUser(  email,phone,username,password)
+         console.log('check responve =>> ',serverData.data.EM)
+         if(+serverData.data.EC==0){
+            toast.success(serverData.data.EM)
+            navigate('/login')
+            
+         }else{
+            toast.error(serverData.data.EM)
+            return false
+         }
         } catch (error) {
             console.log("OoO Lỗi rồi =>",error)
         }
-        toast.success("Bạn đã đăng ký thành công")
+      
       }
       
     }
