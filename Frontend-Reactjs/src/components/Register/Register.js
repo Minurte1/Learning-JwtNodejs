@@ -93,10 +93,15 @@ const [objectCheckInput, setObjectCheckInput] = useState(defaultValidInput);
         // axios.post("http://localhost:3003/api/v1/register").then(data =>{
         //     console.log("Check data =>",data)
         // })
-        axios.post('http://localhost:3003/api/v1/register', {
-            email,phone,username,password,confirmPassword
-            
-          })
+        try {
+            axios.post('http://localhost:3003/api/v1/register', {
+                email,phone,username,password,confirmPassword
+                
+              })
+        } catch (error) {
+            console.log("OoO Lỗi rồi =>",error)
+        }
+       
     })
     // input1 form-control is-valid is-valid
     return (
