@@ -85,14 +85,6 @@ const [objectCheckInput, setObjectCheckInput] = useState(defaultValidInput);
       if(isValiInput()==false){
         return;
       }else{
-        toast.success("Bạn đã đăng ký thành công")
-      }
-      
-    }
-    useEffect(()=>{
-        // axios.post("http://localhost:3003/api/v1/register").then(data =>{
-        //     console.log("Check data =>",data)
-        // })
         try {
             axios.post('http://localhost:3003/api/v1/register', {
                 email,phone,username,password,confirmPassword
@@ -101,6 +93,15 @@ const [objectCheckInput, setObjectCheckInput] = useState(defaultValidInput);
         } catch (error) {
             console.log("OoO Lỗi rồi =>",error)
         }
+        toast.success("Bạn đã đăng ký thành công")
+      }
+      
+    }
+    useEffect(()=>{
+        // axios.post("http://localhost:3003/api/v1/register").then(data =>{
+        //     console.log("Check data =>",data)
+        // })
+       
        
     })
     // input1 form-control is-valid is-valid
