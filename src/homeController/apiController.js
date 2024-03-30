@@ -1,18 +1,15 @@
-import { registerNewUser } from '../service/loginRegisterService';
+import {
+  registerNewUser,
+  handleUserLogin,
+} from '../service/loginRegisterService';
+
 const testApi = (req, res) => {
   return res.status(200).json({
     message: 'oke',
     data: 'test api',
   });
 };
-const handleLogin = async (req, res) => {
-  console.log('check login =>', req.body);
-  return res.status(200).json({
-    EM: 'OKe pass',
-    EC: 1,
-    DT: '',
-  });
-};
+
 const handleRegister = async (req, res) => {
   try {
     if (
@@ -49,4 +46,23 @@ const handleRegister = async (req, res) => {
     });
   }
 };
+const handleLogin = async (req, res) => {
+  try {
+    console.log('check login =>', req.body);
+    let data = await handleUserLogin(req.body);
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
+  } catch (error) {
+    console.log('error =>>', error);
+    return res.status(500).json({
+      EM: 'error', //error message
+      EC: '-1', //error code
+      DT: '', //date
+    });
+  }
+};
+
 export { testApi, handleRegister, handleLogin };

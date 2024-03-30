@@ -20,19 +20,24 @@ const LoginForm = () => {
   };
   const handleLogin = async (event) => {
     event.preventDefault();
-    setObjectCheckInput(defaultValidInput);
-    if (!valueLogin) {
-      setObjectCheckInput({ ...defaultValidInput, isValueLogin: false });
-      toast.error('Please enter your email address or phone number');
-      return;
-    }
-    if (!password) {
-      setObjectCheckInput({ ...defaultValidInput, isValuePassword: false });
-      toast.error('Please enter your password');
-      return;
-    }
 
-    await LoginUser(valueLogin, password);
+    try {
+      setObjectCheckInput(defaultValidInput);
+      if (!valueLogin) {
+        setObjectCheckInput({ ...defaultValidInput, isValueLogin: false });
+        toast.error('Please enter your email address or phone number');
+        return;
+      }
+      if (!password) {
+        setObjectCheckInput({ ...defaultValidInput, isValuePassword: false });
+        toast.error('Please enter your password');
+        return;
+      }
+
+      await LoginUser(valueLogin, password);
+    } catch (error) {
+      console.log('OoO Error !! =>', error);
+    }
   };
   return (
     <div className="wrap">
