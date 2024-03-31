@@ -19,14 +19,15 @@ function App() {
   return (
     <Router>
       <div className="as">
-        {/* {account && !_.isElement(account) && account.isAuthenticated && <Nav />} */}
+        {account && !_.isElement(account) && account.isAuthenticated && <Nav />}
+
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/users" element={<Users />} />
           {/* Các Route khác nếu cần */}
         </Routes>
-        <ToastContainer position="top-left" autoClose={3000} draggable />{' '}
+        <ToastContainer position="top-left" autoClose={3000} draggable />
       </div>
     </Router>
   );
