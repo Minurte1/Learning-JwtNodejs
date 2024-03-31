@@ -1,0 +1,25 @@
+.nav-bar {
+    background-color: #333; /* Màu nền cho thanh điều hướng */
+  }
+  
+  .nav-list {
+    list-style-type: none; /* Ẩn dấu đầu dòng của danh sách */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    display: inline-block; /* Hiển thị các mục theo chiều ngang */
+    margin-right: 10px; /* Khoảng cách giữa các mục */
+  }
+  
+  .nav-link {
+    color: #fff; /* Màu chữ cho các liên kết */
+    text-decoration: none; /* Ẩn gạch chân của liên kết */
+    padding: 10px; /* Khoảng cách bên trong của liên kết */
+  }
+  
+  .nav-link:hover {
+    background-color: #555; /* Màu nền khi rê chuột vào liên kết */
+  }
+  

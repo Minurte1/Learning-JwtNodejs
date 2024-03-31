@@ -11,3 +11,5 @@ npm install --save-exact bcryptjs@2.4.3 ( mã hóa dữ liệu)
 
 npm install --save-exact sequelize@6.13.0
 npm install --save-exact sequelize-cli@6.3.0
+
+npm install --save-exact lodash (frontend)

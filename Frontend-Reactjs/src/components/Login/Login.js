@@ -34,7 +34,19 @@ const LoginForm = () => {
         return;
       }
 
-      await LoginUser(valueLogin, password);
+      let data = {
+        isAuthenticated: true,
+        token: 'fake token',
+      };
+      let response = await LoginUser(valueLogin, password);
+      if (response && response.data.EC === 0) {
+        sessionStorage.setItem('account', JSON.stringify(data));
+        navigate('/users');
+        toast.success(response.data.EM);
+      }
+      if (response && response.data.EC !== 0) {
+        toast.error(response.data.EM);
+      }
     } catch (error) {
       console.log('OoO Error !! =>', error);
     }
