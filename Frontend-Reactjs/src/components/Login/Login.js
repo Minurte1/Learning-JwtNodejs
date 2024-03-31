@@ -43,12 +43,52 @@ const LoginForm = () => {
         sessionStorage.setItem('account', JSON.stringify(data));
         navigate('/users');
         toast.success(response.data.EM);
+        window.location.reload();
       }
       if (response && response.data.EC !== 0) {
         toast.error(response.data.EM);
       }
     } catch (error) {
       console.log('OoO Error !! =>', error);
+    }
+  };
+  const handleLoginHaveEnter = async (event) => {
+    // event.preventDefault();
+
+    try {
+      setObjectCheckInput(defaultValidInput);
+      if (!valueLogin) {
+        setObjectCheckInput({ ...defaultValidInput, isValueLogin: false });
+        toast.error('Please enter your email address or phone number');
+        return;
+      }
+      if (!password) {
+        setObjectCheckInput({ ...defaultValidInput, isValuePassword: false });
+        toast.error('Please enter your password');
+        return;
+      }
+
+      let data = {
+        isAuthenticated: true,
+        token: 'fake token',
+      };
+      let response = await LoginUser(valueLogin, password);
+      if (response && response.data.EC === 0) {
+        sessionStorage.setItem('account', JSON.stringify(data));
+        navigate('/users');
+        toast.success(response.data.EM);
+        window.location.reload();
+      }
+      if (response && response.data.EC !== 0) {
+        toast.error(response.data.EM);
+      }
+    } catch (error) {
+      console.log('OoO Error !! =>', error);
+    }
+  };
+  const handlePressEnter = (event) => {
+    if (event.charCode == 13) {
+      handleLoginHaveEnter();
     }
   };
   return (
@@ -89,7 +129,10 @@ const LoginForm = () => {
                     : 'form-control input2 is-invalid'
                 }
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+                onKeyPress={(event) => handlePressEnter(event)}
               />
 
               <button type="submit" className="button" onClick={handleLogin}>
