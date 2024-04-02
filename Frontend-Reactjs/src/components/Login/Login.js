@@ -113,8 +113,8 @@ const LoginForm = () => {
                 placeholder="Email address or phone number"
                 className={
                   objectCheckInput.isValueLogin
-                    ? 'form-control input1'
-                    : 'form-control input1 is-invalid'
+                    ? 'form-control input1 margin2px'
+                    : 'form-control input1 margin2px is-invalid'
                 }
                 value={valueLogin}
                 onChange={(event) => setvalueLogin(event.target.value)}
@@ -125,8 +125,8 @@ const LoginForm = () => {
                 placeholder="Password"
                 className={
                   objectCheckInput.isPassword
-                    ? 'form-control input2'
-                    : 'form-control input2 is-invalid'
+                    ? 'form-control input2 margin2px'
+                    : 'form-control input2 margin2px is-invalid'
                 }
                 value={password}
                 onChange={(event) => {
