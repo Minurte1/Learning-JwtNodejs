@@ -37,7 +37,7 @@ Cấu hình biến môi trường: Tạo một tập tin .env trong thư mục g
 
 plaintext
 Copy code
-PORT=3000
+PORT=3003
 JWT_SECRET=your_secret_key
 Thay your_secret_key bằng một chuỗi bí mật bất kỳ bạn muốn sử dụng cho việc ký và xác thực JWT.
 
